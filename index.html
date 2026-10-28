@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naija Budget & Expense Tracker</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Link to external CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1> Naija Budget</h1>
+            <div class="header-actions">
+                <button class="btn-outline" onclick="loadSampleData()">Sample Data</button>
+                <button class="btn-outline" onclick="clearAllData()">Reset</button>
+            </div>
+        </header>
+
+        <!-- Currency Selector -->
+        <div class="currency-bar">
+            <span>Currency:</span>
+            <select id="currencySelect" onchange="changeCurrency()">
+                <option value="NGN">₦ NGN (Naira)</option>
+                <option value="USD">$ USD (Dollar)</option>
+                <option value="EUR">€ EUR (Euro)</option>
+                <option value="GBP">£ GBP (Pound)</option>
+                <option value="CAD">C$ CAD (Canadian Dollar)</option>
+            </select>
+        </div>
+
+        <!-- Balance Card -->
+        <div class="balance-card">
+            <h3>Total Balance</h3>
+            <div class="amount" id="totalBalance">₦0.00</div>
+        </div>
+
+        <!-- Summary Grid -->
+        <div class="summary-grid">
+            <div class="summary-box">
+                <h4>Total Income</h4>
+                <div class="income-amt" id="totalIncome">₦0.00</div>
+            </div>
+            <div class="summary-box">
+                <h4>Total Expenses</h4>
+                <div class="expense-amt" id="totalExpense">₦0.00</div>
+            </div>
+        </div>
+
+        <!-- Add Transaction Form -->
+        <div class="card">
+            <h3>Add Transaction</h3>
+            <form id="transactionForm" onsubmit="addTransaction(event)">
+                <div class="form-group">
+                    <label for="text">Description</label>
+                    <input type="text" id="text" placeholder="e.g., Fuel, Food, Data subscription..." required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="amount">Amount</label>
+                        <input type="number" id="amount" step="0.01" placeholder="0.00" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="type">Type</label>
+                        <select id="type" onchange="updateCategories()">
+                            <option value="expense">Expense</option>
+                            <option value="income">Income</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select id="category">
+                        <!-- Populated dynamically -->
+                    </select>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%;">Add Transaction</button>
+            </form>
+        </div>
+
+        <!-- Transaction History -->
+        <div class="card">
+            <h3>Transaction History</h3>
+            <div class="filter-row">
+                <input type="text" id="searchInput" placeholder="Search transactions..." oninput="renderTransactions()">
+            </div>
+            <ul id="transactionList" class="transaction-list">
+                <!-- Populated dynamically -->
+            </ul>
+        </div>
+    </div>
+
+    <!-- Link to external JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
